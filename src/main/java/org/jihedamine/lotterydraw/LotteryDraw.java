@@ -4,7 +4,6 @@ import org.jihedamine.bucket.Bucket;
 import org.jihedamine.bucket.exceptions.EmptyBucketException;
 import org.jihedamine.lotterydraw.exceptions.LotteryDrawAlreadyHappenedException;
 import org.jihedamine.lotterydraw.exceptions.LotteryDrawDidNotHappenException;
-import org.jihedamine.lotterydraw.exceptions.LotteryDrawExistingParticipantException;
 import org.jihedamine.lotterydraw.exceptions.LotteryDrawInitializationException;
 import org.jihedamine.prizestrategy.PrizeStrategy;
 import org.jihedamine.util.StringFormattingUtil;
@@ -130,18 +129,11 @@ public class LotteryDraw {
      * @param firstName The first name of the lottery participant who purchases the ticket
      * @return The number of the lottery ball this ticket refers to
      * @throws LotteryDrawAlreadyHappenedException if the lottery draw has already happened for this LotteryDraw instance
-     * @throws LotteryDrawExistingParticipantException if a ticket was already sold to a participant
-     * with the provided first name for this LotteryDraw instance
      * @throws EmptyBucketException if no more tickets are available for sale for this LotteryDraw instance
      */
-    public int purchaseTicket(String firstName) throws LotteryDrawAlreadyHappenedException,
-            LotteryDrawExistingParticipantException, EmptyBucketException {
+    public int purchaseTicket(String firstName) throws LotteryDrawAlreadyHappenedException, EmptyBucketException {
         if (drawHappened) {
             throw new LotteryDrawAlreadyHappenedException();
-        }
-
-        if (purchasedBallsMap.values().stream().anyMatch(name -> name.equals(firstName))) {
-            throw new LotteryDrawExistingParticipantException(firstName);
         }
 
         int purchasedBallNumber = tickets.pickItem();

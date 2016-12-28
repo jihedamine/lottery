@@ -3,7 +3,6 @@ package org.jihedamine.consoleapp.command.lottery;
 import org.jihedamine.bucket.exceptions.EmptyBucketException;
 import org.jihedamine.lotterydraw.LotteryDraw;
 import org.jihedamine.lotterydraw.exceptions.LotteryDrawAlreadyHappenedException;
-import org.jihedamine.lotterydraw.exceptions.LotteryDrawExistingParticipantException;
 
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -64,7 +63,7 @@ public class PurchaseLotteryTicketCommand extends AbstractLotteryCommand {
         try {
             Object ballNumber = lotteryDraw.purchaseTicket(participantFirstName);
             return String.format("Purchased number for %s: %s%n", participantFirstName, ballNumber.toString());
-        } catch (LotteryDrawAlreadyHappenedException | LotteryDrawExistingParticipantException | EmptyBucketException e) {
+        } catch (LotteryDrawAlreadyHappenedException | EmptyBucketException e) {
             LOG.log(Level.FINE, e.getMessage(), e);
             return e.getMessage();
         }
