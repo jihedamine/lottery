@@ -1,0 +1,13 @@
+.DS_Store
+/classes
+/junit/classes
+/build
+/.gradle
+bin
+.idea
+.iml
+*.bat
+.settings/
+.project
+.classpath
+*~
